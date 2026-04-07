@@ -1,0 +1,25 @@
+# Security (NEVER PUSH THESE)
+.env
+.env.*
+
+# Python / Django
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# Docker
+.dockerignore
+
+# IDEs and OS Files
+.vscode/
+.idea/
+.DS_Store
