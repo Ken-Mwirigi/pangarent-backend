@@ -11,7 +11,7 @@ WORKDIR /app
 # 4. Copy your requirements file and install dependencies
 COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
-RUN python manage.py collectstatic --noinput
+
 # 5. Copy the rest of your project code into the container
 COPY . /app/
 
@@ -19,4 +19,5 @@ COPY . /app/
 EXPOSE 8000
 
 # 7. Start the production server using Gunicorn
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
+# THE FIX: We use 'sh -c' to run collectstatic right before Gunicorn turns on!
+CMD ["sh", "-c", "python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8000"]
