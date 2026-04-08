@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt', 
     'corsheaders',
+    'anymail',
 
     'accounts',
     'properties',
@@ -123,14 +124,30 @@ DATABASES = {
 # ==========================================
 # EMAIL CONFIGURATION
 # ==========================================
+'''
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+'''
+# ==========================================
+# EMAIL CONFIGURATION (DYNAMIC)
+# ==========================================
+# Pull the email address from your .env file
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='onboarding@resend.dev')
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL  
 
-
+if DEBUG:
+    # LOCAL LAPTOP: Print emails to the VS Code terminal to save API limits
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    # PRODUCTION (RENDER): Send real emails via Resend HTTP API
+    EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
+    ANYMAIL = {
+        "RESEND_API_KEY": env('RESEND_API_KEY', default=''),
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
