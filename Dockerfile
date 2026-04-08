@@ -11,7 +11,7 @@ WORKDIR /app
 # 4. Copy your requirements file and install dependencies
 COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
-
+RUN python manage.py collectstatic --noinput
 # 5. Copy the rest of your project code into the container
 COPY . /app/
 
