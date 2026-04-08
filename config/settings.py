@@ -207,3 +207,6 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+# Tells Django where the frontend lives. 
+# It checks the .env file first. If it can't find one, it defaults to localhost.
+FRONTEND_URL = env('FRONTEND_URL', default='http://localhost:8080')

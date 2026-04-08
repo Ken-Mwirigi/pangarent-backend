@@ -82,7 +82,7 @@ class PasswordResetRequestSerializer(serializers.Serializer):
             greeting_name = user.username
         
         # 2. Build the link pointing back to your Lovable React frontend
-        frontend_url = "http://localhost:8080" 
+        frontend_url = settings.FRONTEND_URL 
         reset_link = f"{frontend_url}/reset-password/{uid}/{token}/"
         
         # 3. Send the email
