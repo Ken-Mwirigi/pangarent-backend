@@ -26,8 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # 2. Initialize environ and point to the .env file
 env = environ.Env(
     # Set casting and default values
-    DEBUG=(bool, False)
-)
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env.bool('DJANGO_DEBUG', default=False))
+
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
