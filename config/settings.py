@@ -185,7 +185,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = False  # Turn this off to lock the doors!
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Keeps your laptop testing working
-    "https://pangarent.vercel.app",  # <-- REPLACE WITH YOUR REAL VERCEL URL
+    "https://pangarent.vercel.app",
+    "https://pangarent.site",       # <-- ADD THIS NEW LINE!
+    "https://www.pangarent.site"  # <-- REPLACE WITH YOUR REAL VERCEL URL
 ]
 CORS_ALLOW_CREDENTIALS = True
 
